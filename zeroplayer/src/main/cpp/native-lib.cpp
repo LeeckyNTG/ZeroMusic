@@ -36,13 +36,21 @@ Java_com_clover_zeroplayer_player_WlPlay_n_1parpared(JNIEnv *env, jobject instan
     const char *source = env->GetStringUTFChars(source_, 0);
 
     // TODO
-
     if (fFmpeg == NULL){
         callJava = new WlCallJava(javaVM,env,&instance);
     }
-
     fFmpeg = new WlFFmpeg(callJava,source);
     fFmpeg->parpared();
+}
 
-    env->ReleaseStringUTFChars(source_, source);
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_clover_zeroplayer_player_WlPlay_n_1start(JNIEnv *env, jobject instance) {
+
+    // TODO
+    if(fFmpeg != NULL)
+    {
+        fFmpeg->start();
+    }
+
 }

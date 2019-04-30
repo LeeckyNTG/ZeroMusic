@@ -5,9 +5,13 @@
 #ifndef ZEROMUSIC_WLFFMPEG_H
 #define ZEROMUSIC_WLFFMPEG_H
 
+extern "C"
+{
 #include <libavformat/avformat.h>
+}
 #include "WlCallJava.h"
 #include "pthread.h"
+#include "WlAudio.h"
 
 class WlFFmpeg {
 
@@ -16,6 +20,7 @@ public:
     const char *url = NULL;
     pthread_t decodeThread;
     AVFormatContext *pFormatCtx = NULL;
+    WlAudio *audio = NULL;
 
 public:
     WlFFmpeg(WlCallJava *callJava, const char *url);

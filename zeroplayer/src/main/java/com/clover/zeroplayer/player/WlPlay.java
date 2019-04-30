@@ -3,6 +3,7 @@ package com.clover.zeroplayer.player;
 import android.text.TextUtils;
 
 import com.clover.zeroplayer.listener.WlOnParparedListener;
+import com.clover.zeroplayer.log.MyLog;
 
 /**
  * Created by clover on 19-4-30.
@@ -43,7 +44,6 @@ public class WlPlay {
         if (TextUtils.isEmpty(source)) {
             return;
         }
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -53,6 +53,19 @@ public class WlPlay {
     }
 
 
+    public void start() {
+        if (TextUtils.isEmpty(source)) {
+            MyLog.d("source is empty");
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                n_start();
+            }
+        }).start();
+    }
+
     public void onCallParpared() {
         if (onParparedListener != null) {
             onParparedListener.onParpared();
@@ -60,5 +73,7 @@ public class WlPlay {
     }
 
     public native void n_parpared(String source);
+
+    public native void n_start();
 
 }
